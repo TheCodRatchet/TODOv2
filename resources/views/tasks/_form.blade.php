@@ -3,12 +3,19 @@
     <div class="mb-4">
         <label for="title" class="block text-grey-darker text-sm font-bold mb-2">Title</label>
         <input id="title" class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-               name="title" placeholder="Enter Task Title">
+               name="title" value="{{ old('title', $task->title ?? '')  }}">
+        @error('title')
+        <p style="color:red;">{{ $message }}</p>
+        @enderror
     </div>
 
     <div class="mb-4">
         <label for="content" class="block text-grey-darker text-sm font-bold mb-2">Content</label>
-        <textarea id="content" class=" border rounded w-full py-2 px-3 text-grey-darker" name="content"></textarea>
+        <textarea id="content" class=" border rounded w-full py-2 px-3 text-grey-darker"
+                  name="content">{{ old('content', $task->content ?? '') }}</textarea>
+        @error('content')
+        <p style="color:red;">{{ $message }}</p>
+        @enderror
     </div>
 
     <div class="mb-4">
