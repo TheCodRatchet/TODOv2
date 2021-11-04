@@ -6,23 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 class UpdateTasksTableWithCompletedAtField extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
-        //
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->timestamp('completed_at')
+                ->nullable()
+                ->default(null)
+                ->after('content');
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        //
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('completed_at');
+        });
     }
 }

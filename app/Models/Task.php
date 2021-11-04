@@ -9,5 +9,10 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
+    protected array $fillable = ['title', 'content'];
+
+    public function toggleComplete()
+    {
+        $this->completed_at = $this->completed_at ? null : now();
+    }
 }

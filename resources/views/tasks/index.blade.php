@@ -13,8 +13,10 @@
                     @foreach($tasks as $task)
                         <ul class="list-disc">
                             <li>
-                                <h4>{{ $task->title }}</h4>
-                                <p>
+                                <h4 class="{{ $task->completed_at ? 'strike-off' : '' }}">
+                                    {{ $task->title }}
+                                </h4>
+                                <p class="{{ $task->completed_at ? 'strike-off' : '' }}">
                                     {{ $task->content }}
                                 </p>
                                 <div style="display: inline">
@@ -22,7 +24,12 @@
                                     <form method="post" action="{{ route('tasks.destroy', $task) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="confirm('Are You sure?')">DELETE</button>
+                                        <button type="submit" onclick="return confirm('Are You sure?')">DELETE</button>
+                                    </form>
+                                    <form method="post" action="{{ route('tasks.complete', $task) }}">
+                                        @csrf
+                                        <button type="submit" onclick="return confirm('Are You sure?')">COMPLETE
+                                        </button>
                                     </form>
                                 </div>
                             </li>
